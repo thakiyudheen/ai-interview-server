@@ -15,8 +15,8 @@ const server = http.createServer(app);
 
 app.use(
   cors({
-    origin: process.env.FRONTEND,
-    methods: ["GET", "POST","DELETE"],
+    origin: "https://ai-intervie-client.vercel.app",
+    methods: ["GET", "POST", "DELETE"],
     credentials: true,
   })
 );
@@ -28,8 +28,8 @@ app.use(cookieParser());
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND,
-    methods: ["GET", "POST","DELETE"],
+    origin: "https://ai-intervie-client.vercel.app",
+    methods: ["GET", "POST", "DELETE"],
     credentials: true,
   },
 });
