@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGO_URL =
-  process.env.MONGO_URI as string;
+const MONGO_URL = process.env.MONGO_URI as string;
 
 let isConnected: boolean = false;
 
@@ -11,11 +10,7 @@ export const connectToDB = async () => {
   }
 
   try {
-    const db = await mongoose.connect(MONGO_URL, {
-      bufferCommands: false,
-    });
-
-    isConnected = db.connections[0].readyState === 1;
+    const db = await mongoose.connect(MONGO_URL);
     console.log("✅ MongoDB Connected");
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);
