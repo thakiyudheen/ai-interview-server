@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const MONGO_URL =
-  process.env.MONGO_URI || "mongodb://127.0.0.1:27017/bg-remover";
+  process.env.MONGO_URI as string;
 
 let isConnected: boolean = false;
 

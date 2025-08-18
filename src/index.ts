@@ -1,3 +1,5 @@
+import {config} from "dotenv";
+config();
 import express from "express";
 import http from "http";
 import cors from "cors";
@@ -7,9 +9,7 @@ import morgan from "morgan";
 import interviewRouter from "./router/interview-route";
 import authRouter from "./router/auth-route";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
 
-dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
