@@ -22,31 +22,77 @@ Task:
 
 Important: Do NOT add any extra text outside the JSON format. Only return valid JSON.
 `;
-
 export const questionAnswerPrompt: TQAQuestionPrompt = ({
   role,
   experience,
   topicsToFocus,
   noOfQuestions,
 }) => `
-You are an AI trained to generate technical interview questions and answers.
+You are an AI that generates high-quality technical interview QUESTIONS ONLY.
 
 Task:
 - Role: ${role}
 - Candidate Experience: ${experience} years
 - Focus Topics: ${topicsToFocus}
-- Write ${noOfQuestions} interview questions.
-- For each question, generate a detailed but beginner-friendly answer.
-- If the answer needs a code example, add a small code block inside.
-- Keep formatting very clean.
-- Return a pure JSON array like:
+- Generate exactly ${noOfQuestions} interview QUESTIONS.
+- Each question should be clear, relevant, and difficulty matched to experience level.
+- Do NOT include answers.
+- Do NOT include numbering.
+- Do NOT include explanations.
+
+Return ONLY a pure JSON array of strings like:
+
 [
-  {
-    "question": "Question here?",
-    "answer": "Answer here."
-  },
+  "Question 1 here",
+  "Question 2 here",
   ...
 ]
 
-Important: Do NOT add any extra text. Only return valid JSON.
+Important:
+- No extra text.
+- No markdown.
+- No comments.
+- Only valid JSON array of strings.
+`;
+
+
+export const interviewFeedbackPrompt = (conversation: string) => `
+You are an expert AI technical interviewer.
+
+Analyze the entire INTERVIEW CONVERSATION below:
+
+--- START OF CONVERSATION ---
+${conversation}
+--- END OF CONVERSATION ---
+
+Your task:
+Evaluate the candidate’s performance ONLY based on the conversation.
+You must judge suitability WITHOUT needing any job role.
+
+Return feedback ONLY in the following strict JSON format:
+
+{
+  "communication": {
+    "score": number (0-10),
+    "feedback": string
+  },
+  "technical": {
+    "score": number (0-10),
+    "feedback": string
+  },
+  "strengths": [ "string", ... ],
+  "mistakes": [ "string", ... ],
+  "improvements": [ "string", ... ],
+  "finalRating": number (0-10),
+  "verdict": "Accepted" | "Rejected",
+  "summary": "2-4 line short summary"
+}
+
+Rules:
+- Be extremely honest and detailed.
+- If the conversation is weak or incomplete, reduce points.
+- Communication score = clarity, confidence, structure.
+- Technical score = accuracy, depth, correctness.
+- finalRating = (communication + technical) / 2.
+- verdict = "Accepted" if finalRating >= 6.5, else "Rejected".
 `;

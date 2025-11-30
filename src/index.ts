@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 const server = http.createServer(app);
 
+
 const corsOptions = {
   origin: process.env.FRONTEND,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

@@ -1,12 +1,13 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface ISession  {
+export interface ISession {
   _id: string | mongoose.Types.ObjectId;
   userId: mongoose.Types.ObjectId;
   role: string;
   experience: number;
   topicsToFocus: string;
   noOfQuestions: number;
+  conversation?: string | null;
   createdAt: Date;
 }
 
@@ -17,6 +18,7 @@ const sessionSchema = new Schema<ISession>(
     experience: { type: Number, required: true },
     topicsToFocus: { type: String, required: true },
     noOfQuestions: { type: Number, required: true },
+    conversation: { type: String, default: null },
   },
   { timestamps: true }
 );

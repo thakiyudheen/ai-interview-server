@@ -6,6 +6,8 @@ import { getExplanation } from "../controller/interview/get-explanation";
 import { getSession } from "../controller/interview/get-sessions";
 import { deleteSession } from "../controller/interview/delete-session";
 import { getPortfolioAnswer } from "../controller/scrap/scrap-portfolio";
+import { updateSessionConversation } from "../controller/interview/update-session";
+import { generateInterviewFeedback } from "../controller/interview/get-feedback";
 const interviewRouter = Router();
 
 interviewRouter.get("/sessions", authMiddleware, getSession);
@@ -13,6 +15,8 @@ interviewRouter.get("/sessions/:sessionId", authMiddleware, getQuestions);
 interviewRouter.post("/sessions", authMiddleware, createSession);
 interviewRouter.delete("/sessions/:sessionId", authMiddleware, deleteSession);
 interviewRouter.get("/session/explanation", authMiddleware, getExplanation);
+interviewRouter.put("/session/:sessionId", authMiddleware, updateSessionConversation);
+interviewRouter.get("/session/:sessionId/feedback", authMiddleware,generateInterviewFeedback );
 interviewRouter.get("/scrap", getPortfolioAnswer);
 interviewRouter.get("/instagram", getPortfolioAnswer);
 

@@ -25,7 +25,6 @@ export const authMiddleware = (
 ) => {
   const token = req.cookies?.jwtToken;
   
-  console.log("this is the tocken that available in this application",req?.cookies?.jwtToken);
   if (!token) {
     res
       .status(401)
