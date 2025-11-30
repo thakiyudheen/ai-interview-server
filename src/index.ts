@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
 connectToDB();
 
 app.get("/working", (req, res) => {
-  res.json({ message: "API working fine , you can move to further steps" });
+  res.json({ message: "API working fine , you can move to further step." });
 });
 
 app.get("/", (_req, res) => {
