@@ -23,7 +23,7 @@ export const signupUser = async (
     req.body.password = await hashPassword(password);
     const user = await UserModel.create({ ...req.body });
 
-    const token = jwtToken({ _id: req.body._id, email: email });
+    const token = jwtToken({ _id: user?._id.toString(), email: user.email });
 
     res.cookie("jwtToken", token, {
       httpOnly: true,
